@@ -1,0 +1,28 @@
+Nro_Pedido,Fecha,Cliente,Canal_Captacion,Producto,Cantidad,Subtotal_Venta,Barrio_Santa_Fe,Metodo_Pago,Atendido_Por,Campana_Ads,Inversion_Campana,ROI_Campana_Total
+17,2024-04-03,"Nicolas Mendoza",Marketplace,"Box Premium XL",1,25000.00,Centro,"Mercado Pago","Kevin Larguía","Especial Día del Niño",8000.00,112000.00
+8,2024-03-18,"Elena Garcia",WhatsApp,"Box Premium XL",1,25000.00,"Candioti Norte/Sur",Transferencia,"Kevin Larguía","Especial Día del Niño",8000.00,112000.00
+8,2024-03-18,"Elena Garcia",WhatsApp,"Vaso 500cc",1,6000.00,"Candioti Norte/Sur",Transferencia,"Kevin Larguía","Especial Día del Niño",8000.00,112000.00
+1,2024-03-01,"Matias Rossi",Instagram,"Vaso 500cc",1,6000.00,"Candioti Norte/Sur","Mercado Pago","Kevin Larguía","Promo Otoño",5000.00,67000.00
+15,2024-04-01,"Tomas Gonzalez",Instagram,"Bandejas redondas",1,12000.00,"Candioti Norte/Sur","Mercado Pago","Kevin Larguía","Promo Otoño",5000.00,67000.00
+10,2024-03-22,"Laura Martinez",Instagram,"Bandejas redondas",2,24000.00,Constituyentes,Transferencia,"Kevin Larguía","Hot Sale Gomitas",12000.00,117500.00
+4,2024-03-08,"Agustin Ferrero",Instagram,"Bandejas redondas",2,24000.00,Centro,Transferencia,"Kevin Larguía","Promo Otoño",5000.00,67000.00
+12,2024-03-26,"Luciana Gomez",WhatsApp,Barquitos,1,14000.00,Guadalupe,"Mercado Pago","Kevin Larguía","Especial Día del Niño",8000.00,112000.00
+10,2024-03-22,"Laura Martinez",Instagram,Barquitos,1,14000.00,Constituyentes,Transferencia,"Kevin Larguía","Hot Sale Gomitas",12000.00,117500.00
+4,2024-03-08,"Agustin Ferrero",Instagram,Barquitos,1,14000.00,Centro,Transferencia,"Kevin Larguía","Promo Otoño",5000.00,67000.00
+1,2024-03-01,"Matias Rossi",Instagram,Barquitos,1,14000.00,"Candioti Norte/Sur","Mercado Pago","Kevin Larguía","Promo Otoño",5000.00,67000.00
+11,2024-03-25,"Matias Rossi",Instagram,"Vaso 250cc",1,4000.00,Centro,Efectivo,"Victoria Radolovic","Venta Organica",0.00,0.00
+19,2024-04-05,"Juan Lopez",Instagram,"Vaso 500cc",1,6000.00,Constituyentes,Transferencia,"Victoria Radolovic","Hot Sale Gomitas",12000.00,117500.00
+13,2024-03-28,"Carlos Perez",Marketplace,"Vaso 500cc",1,6000.00,"El Pozo",Transferencia,"Victoria Radolovic","Hot Sale Gomitas",12000.00,117500.00
+2,2024-03-02,"Luciana Gomez",WhatsApp,"Vaso 500cc",1,6000.00,Guadalupe,Transferencia,"Victoria Radolovic","Sorteo Mes del Amigo",3500.00,14500.00
+7,2024-03-15,"Juan Lopez",Instagram,"Bandejas redondas",1,12000.00,"Barrio Sur",Efectivo,"Victoria Radolovic","Venta Organica",0.00,0.00
+18,2024-04-04,"Sofia Benitez",Instagram,"Box Premium XL",2,50000.00,"Barrio Roma","Tarjeta de Débito","Federico Del Carlo","Venta Organica",0.00,0.00
+14,2024-03-30,"Agustin Ferrero",Instagram,"Box Premium XL",4,100000.00,"Santo Tomé",Efectivo,"Federico Del Carlo","Venta Organica",0.00,0.00
+5,2024-03-10,"Tomas Gonzalez",Instagram,"Box Premium XL",1,25000.00,"Santo Tomé","Mercado Pago","Federico Del Carlo","Especial Día del Niño",8000.00,112000.00
+3,2024-03-05,"Carlos Perez",Marketplace,"Box Premium XL",3,75000.00,"El Pozo",Efectivo,"Federico Del Carlo","Venta Organica",0.00,0.00
+20,2024-04-06,"Elena Garcia",WhatsApp,Bolsitas,1,2500.00,"Barrio Sur",Efectivo,"Federico Del Carlo","Descuento Fin de Semana",2500.00,15500.00
+9,2024-03-20,"Pedro Sanchez",Marketplace,"Vaso 250cc",1,4000.00,"Barrio Roma","Mercado Pago","Federico Del Carlo","Descuento Fin de Semana",2500.00,15500.00
+6,2024-03-12,"Sofia Benitez",Instagram,"Vaso 250cc",1,4000.00,Colastiné,"Tarjeta de Débito","Federico Del Carlo","Hot Sale Gomitas",12000.00,117500.00
+20,2024-04-06,"Elena Garcia",WhatsApp,"Vaso 500cc",2,12000.00,"Barrio Sur",Efectivo,"Federico Del Carlo","Descuento Fin de Semana",2500.00,15500.00
+3,2024-03-05,"Carlos Perez",Marketplace,"Bandejas redondas",1,12000.00,"El Pozo",Efectivo,"Federico Del Carlo","Venta Organica",0.00,0.00
+16,2024-04-02,"Valentina Silva",WhatsApp,Barquitos,1,14000.00,Colastiné,Transferencia,"Federico Del Carlo","Sorteo Mes del Amigo",3500.00,14500.00
+6,2024-03-12,"Sofia Benitez",Instagram,Barquitos,1,14000.00,Colastiné,"Tarjeta de Débito","Federico Del Carlo","Hot Sale Gomitas",12000.00,117500.00
