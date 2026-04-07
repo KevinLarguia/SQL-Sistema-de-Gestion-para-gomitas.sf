@@ -116,6 +116,7 @@ El archivo **Script 3 Objetos.sql** contiene la lógica programada para automati
 
 ## Informe Analítico (Power BI)
 <img width="1437" height="806" alt="dashboard para entrega final" src="https://github.com/user-attachments/assets/bba03d5a-f9b6-4447-997e-67f0cd0553f9" />
+
 Se procesó la información mediante **Microsoft Power BI**, generando un dashboard interactivo que analiza los siguientes indicadores estratégicos:
 1. **Rentabilidad por Campaña (ROI)**: Identificación de las pautas más eficientes.
 2. **Facturación por Barrio**: Análisis geográfico de ventas en la ciudad de Santa Fe.
