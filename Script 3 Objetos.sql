@@ -2,83 +2,9 @@
 Proyecto Final SQL - Kevin Larguía
 */
 
-/* Script de Vistas Optimizado
-Proyecto Final SQL - Kevin Larguía
-*/
-
 USE gomitas_sf;
 
--- 1. Rentabilidad de campañas 
-CREATE OR REPLACE VIEW vw_rentabilidad_campanas AS
-SELECT 
-    c.NOM_ADS AS Campana,
-    SUM(c.COST_ADS) AS Inversion_Total, -- Sumamos inversión si el nombre se repite
-    IFNULL(SUM(p.TOT_PED), 0) AS Ingresos_Generados,
-    (IFNULL(SUM(p.TOT_PED), 0) - SUM(c.COST_ADS)) AS ROI
-FROM CAMPANAS_ADS c
-LEFT JOIN PEDIDOS p ON c.ID_ADS = p.ID_ADS
-GROUP BY c.NOM_ADS -- Corregido: agrupa por nombre
-ORDER BY ROI DESC;
-
--- Vista 2: Reporte para Power BI 
-CREATE OR REPLACE VIEW vw_exportacion_ventas AS
-SELECT 
-    p.ID_PED AS Nro_Pedido,
-    DATE_FORMAT(p.FCH_PED, '%Y-%m-%d') AS Fecha,
-    c.NOM_CLI AS Cliente,
-    c.ORIG_CLI AS Canal_Captacion,
-    prod.NOM_CONT AS Producto,
-    dp.CANT AS Cantidad,
-    (prod.PRC_FIJO * dp.CANT) AS Subtotal_Venta,
-    z.NOM_ZONA AS Barrio_Santa_Fe,
-    mp.NOM_PAGO AS Metodo_Pago,
-    e.NOM_EMP AS Atendido_Por,
-    IFNULL(ads.NOM_ADS, 'Venta Organica') AS Campana_Ads,
-    IFNULL(ads.COST_ADS, 0) AS Inversion_Campana,
-    -- Aquí llamamos a la nueva función
-    IFNULL(fn_calcular_roi_campana(p.ID_ADS), 0) AS ROI_Campana_Total
-FROM PEDIDOS p
-INNER JOIN CLIENTES c ON p.ID_CLI = c.ID_CLI
-INNER JOIN DETALLE_PEDIDO dp ON p.ID_PED = dp.ID_PED
-INNER JOIN PRODUCTOS prod ON dp.ID_PROD = prod.ID_PROD
-INNER JOIN ZONAS_ENVIO z ON p.ID_ZONA = z.ID_ZONA
-INNER JOIN METODOS_PAGO mp ON p.ID_PAGO = mp.ID_PAGO
-INNER JOIN EMPLEADOS e ON p.ID_EMP = e.ID_EMP
-LEFT JOIN CAMPANAS_ADS ads ON p.ID_ADS = ads.ID_ADS;
-
--- 3. Ranking de productos 
-CREATE OR REPLACE VIEW vw_productos_top AS
-SELECT 
-    p.NOM_CONT AS Producto,
-    SUM(dp.CANT) AS Unidades_Vendidas
-FROM PRODUCTOS p
-JOIN DETALLE_PEDIDO dp ON p.ID_PROD = dp.ID_PROD
-GROUP BY p.NOM_CONT -- Corregido: agrupa por nombre
-ORDER BY Unidades_Vendidas DESC;
-
--- 4. Ventas por zona 
-CREATE OR REPLACE VIEW vw_ventas_por_zona AS
-SELECT 
-    z.NOM_ZONA AS Zona,
-    COUNT(p.ID_PED) AS Total_Pedidos,
-    SUM(p.TOT_PED) AS Facturacion_Zona
-FROM ZONAS_ENVIO z
-LEFT JOIN PEDIDOS p ON z.ID_ZONA = p.ID_ZONA
-GROUP BY z.NOM_ZONA -- Corregido: agrupa por nombre
-ORDER BY Facturacion_Zona DESC;
-
--- 5. Gestión de empleados 
-CREATE OR REPLACE VIEW vw_gestion_empleados AS
-SELECT 
-    e.NOM_EMP AS Empleado,
-    e.PUESTO AS Cargo,
-    COUNT(p.ID_PED) AS Pedidos_Gestionados
-FROM EMPLEADOS e
-LEFT JOIN PEDIDOS p ON e.ID_EMP = p.ID_EMP
-GROUP BY e.NOM_EMP, e.PUESTO -- Corregido: agrupa por nombre y cargo
-ORDER BY Pedidos_Gestionados DESC;
-
--- 2. FUNCIONES
+-- 2. FUNCIONES (Se ejecutan antes que las vistas ya que vw_rentabilidad_campanas usa un dato de Función 3: Cálculo dinámico de ROI por campaña)
 
 DELIMITER //
 
@@ -127,6 +53,78 @@ BEGIN
 END //
 
 DELIMITER ;
+
+-- 1 VISTAS
+
+-- Vista 1: Rentabilidad de campanas
+CREATE OR REPLACE VIEW vw_rentabilidad_campanas AS
+SELECT 
+    c.NOM_ADS AS Campana,
+    SUM(c.COST_ADS) AS Inversion_Total, -- Sumamos inversión si el nombre se repite
+    IFNULL(SUM(p.TOT_PED), 0) AS Ingresos_Generados,
+    (IFNULL(SUM(p.TOT_PED), 0) - SUM(c.COST_ADS)) AS ROI
+FROM CAMPANAS_ADS c
+LEFT JOIN PEDIDOS p ON c.ID_ADS = p.ID_ADS
+GROUP BY c.NOM_ADS -- Corregido: agrupa por nombre
+ORDER BY ROI DESC;
+
+-- Vista 2: Reporte para Power BI 
+CREATE OR REPLACE VIEW vw_exportacion_ventas AS
+SELECT 
+    p.ID_PED AS Nro_Pedido,
+    DATE_FORMAT(p.FCH_PED, '%Y-%m-%d') AS Fecha,
+    c.NOM_CLI AS Cliente,
+    c.ORIG_CLI AS Canal_Captacion,
+    prod.NOM_CONT AS Producto,
+    dp.CANT AS Cantidad,
+    (prod.PRC_FIJO * dp.CANT) AS Subtotal_Venta,
+    z.NOM_ZONA AS Barrio_Santa_Fe,
+    mp.NOM_PAGO AS Metodo_Pago,
+    e.NOM_EMP AS Atendido_Por,
+    IFNULL(ads.NOM_ADS, 'Venta Organica') AS Campana_Ads,
+    IFNULL(ads.COST_ADS, 0) AS Inversion_Campana,
+    -- Aquí llamamos a la nueva función
+    IFNULL(fn_calcular_roi_campana(p.ID_ADS), 0) AS ROI_Campana_Total
+FROM PEDIDOS p
+INNER JOIN CLIENTES c ON p.ID_CLI = c.ID_CLI
+INNER JOIN DETALLE_PEDIDO dp ON p.ID_PED = dp.ID_PED
+INNER JOIN PRODUCTOS prod ON dp.ID_PROD = prod.ID_PROD
+INNER JOIN ZONAS_ENVIO z ON p.ID_ZONA = z.ID_ZONA
+INNER JOIN METODOS_PAGO mp ON p.ID_PAGO = mp.ID_PAGO
+INNER JOIN EMPLEADOS e ON p.ID_EMP = e.ID_EMP
+LEFT JOIN CAMPANAS_ADS ads ON p.ID_ADS = ads.ID_ADS;
+
+-- 3. Ranking de productos 
+CREATE OR REPLACE VIEW vw_productos_top AS
+SELECT 
+    p.NOM_CONT AS Producto,
+    SUM(dp.CANT) AS Unidades_Vendidas
+FROM PRODUCTOS p
+JOIN DETALLE_PEDIDO dp ON p.ID_PROD = dp.ID_PROD
+GROUP BY p.NOM_CONT 
+ORDER BY Unidades_Vendidas DESC;
+
+-- 4. Ventas por zona 
+CREATE OR REPLACE VIEW vw_ventas_por_zona AS
+SELECT 
+    z.NOM_ZONA AS Zona,
+    COUNT(p.ID_PED) AS Total_Pedidos,
+    SUM(p.TOT_PED) AS Facturacion_Zona
+FROM ZONAS_ENVIO z
+LEFT JOIN PEDIDOS p ON z.ID_ZONA = p.ID_ZONA
+GROUP BY z.NOM_ZONA 
+ORDER BY Facturacion_Zona DESC;
+
+-- 5. Gestión de empleados 
+CREATE OR REPLACE VIEW vw_gestion_empleados AS
+SELECT 
+    e.NOM_EMP AS Empleado,
+    e.PUESTO AS Cargo,
+    COUNT(p.ID_PED) AS Pedidos_Gestionados
+FROM EMPLEADOS e
+LEFT JOIN PEDIDOS p ON e.ID_EMP = p.ID_EMP
+GROUP BY e.NOM_EMP, e.PUESTO 
+ORDER BY Pedidos_Gestionados DESC;
 
 
 -- 3. STORED PROCEDURES
