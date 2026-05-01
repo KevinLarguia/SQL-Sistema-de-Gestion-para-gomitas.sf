@@ -127,7 +127,7 @@ Se procesó la información mediante **Microsoft Power BI**, generando un dashbo
 
 ---
 
-## Herramientas y Tecnologías
+## Herramientas y Tecnologías:
 * **Motor de Base de Datos**: MySQL 8.0.
 * **Modelado**: MySQL Workbench (Ingeniería Inversa para DER).
 * **Analítica**: Microsoft Power BI Desktop.
